@@ -1,0 +1,101 @@
+<div class="top-menu">
+
+    <img class="logo"
+         src="https://angular-academy.s3.amazonaws.com/main-logo/main-page-logo-small-hat.png">
+
+</div>
+
+
+<div class="courses" #container>
+<button (click)="addCourse()"> addCourse </button>
+<!-- Built in Pipes-->
+<div class="demo">
+    <!--{{startDate | date}} 
+    {{startDate | date :'MM/dd/yyyy'}} 
+    {{startDate | date:'MMM/dd/yyyy'}} 
+    {{title | uppercase}} 
+    {{title | lowercase}}
+    {{title | titlecase}}
+    {{price | currency}}
+    {{price | currency:'GBP'}}
+    {{rate | percent}}
+    {{courses|json}}
+    <div *ngFor="let pair of item|keyvalue">
+     {{pair.key +":"+pair.value}}
+    </div>-->
+</div>
+<!--End Built in Pipes-->
+
+
+    <!--ngFor Directive :
+         Built in Variable/Feature : 
+         1.index - to index an item
+         2.first - true for first item
+         4.last - true for last item
+         5.even-true for even item
+         6.odd - true for odd item
+    -->
+    <!--<course-card *ngFor="let course of courses;index as i ; first as isFirst; last as isLast ;even as isEven;odd as isOdd" 
+                [class.is-first]="isFirst"
+                [class.is-last]="isLast"
+                [class.is-even]="isEven"
+                [class.is-odd]="isOdd"
+                (courseSelected)="onCourseClick($event)" [course]="course" [cardIndex]="i+1"> </course-card>-->
+     <!--ngFor directive--
+     <course-card *ngFor="let course of courses;index as i" 
+            (courseSelected)="onCourseClick($event)" [course]="course" [cardIndex]="i+1"> </course-card>
+    <!--end ngfor directive-->
+
+    <!--below statements replace by ngFor directive-->             
+    <!--<course-card (courseSelected)="onCourseClick($event)" [course]="RxJsCourse"> </course-card>
+    <course-card (courseSelected)="onCourseClick($event)" [course]="NgRxCourse"> </course-card>-->
+
+    <!--view child demo-->
+    <!--<course-card #card1 (courseSelected)="onCourseClick($event)" [course]="courses[4]"> </course-card> -->
+    
+    <!--end view child demo-->
+
+    <!-- Angular Content Projection-->
+    <!--<course-card *ngFor="let course of courses;index as i" 
+            (courseSelected)="onCourseClick($event)" [course]="course" [cardIndex]="i+1"> 
+        
+            <div #courseImage>
+                <img width="300" alt="Angular Logo" *ngIf="course.iconUrl"
+                [src]="course.iconUrl" >
+                <p> Total Lessons : 4</p>
+            </div>
+    </course-card>
+
+    <course-card *ngIf="courses[0] as course" 
+            (courseSelected)="onCourseClick($event)" [course]="course" [cardIndex]="i+1"> 
+            <course-image [imageUrl]="course.iconUrl"> </course-image>
+            <course-image [imageUrl]="courses[5].iconUrl"> </course-image>
+            <course-image [imageUrl]="courses[6].iconUrl"> </course-image>
+         
+            
+    </course-card>
+    End Angular Content Projection-->
+
+    <!--Start Angular Template Instantiation-->
+    <ng-template #noImage let-courseName="description">
+        <p class ="warn">{{courseName}} No image is available</p>
+        <img src="/assets/empty-image.png">
+    </ng-template>
+    <!-- start ng-template is instantiated by ngTemplateOutlet-
+    <ng-container *ngTemplateOutlet="noImage;context:{description:courses[0].description}"> 
+
+    </ng-container> -->
+     <!-- end ng-template is instantiated by ngTemplateOutlet-->
+    
+    <hr>
+    <!-- <hr>
+    <course-card *ngIf="courses[0] as course" 
+        (courseSelected)="onCourseClick($event)" [course]="course" [noImageTPl]="noImage" [cardIndex]="i+1"> 
+        <course-image [imageUrl]="course.iconUrl"> </course-image>
+    </course-card> -->
+
+    <course-card #test *ngFor="let course of courses|slice:0:2;" [course]="course" (courseSelected)="onCourseClick($event)"> </course-card>
+    <!-- End Angular Template Instantiation-->
+    </div>
+
+
